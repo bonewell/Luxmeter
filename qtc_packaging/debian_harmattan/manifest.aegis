@@ -65,6 +65,6 @@ AutoGenerateAegisFile
 
 	</request>
 
-	<for path="/opt/Luxmeter/bin/Luxmeter" />
+        <for path="/opt/luxmeter/bin/luxmeter" />
 	<for path="applauncherd-launcher::/usr/bin/applauncherd.bin" id="" />
 </aegis>
