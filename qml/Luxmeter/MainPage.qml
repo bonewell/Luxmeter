@@ -4,6 +4,7 @@ import QtMobility.sensors 1.2
 
 Page {
     id: meter
+    smooth: true
     //tools: commonTools
 
     LightSensor {
@@ -13,11 +14,19 @@ Page {
         onReadingChanged: {
             light.text = reading.lux;
         }
+
+        onActiveChanged: {
+            if (active)
+                ihold.visible = false;
+            else
+                ihold.visible = true;
+        }
     }
 
     Rectangle {
         id: background
         radius: 20
+        smooth: true
         gradient: Gradient {
             GradientStop {
                 position: 0
@@ -39,6 +48,7 @@ Page {
         id: display
         height: 160
         radius: 5
+        smooth: true
         gradient: Gradient {
             GradientStop {
                 position: 0
@@ -63,6 +73,7 @@ Page {
             id: light
             color: "#c00000"
             text: "0"
+            smooth: true
             anchors.rightMargin: 10
             anchors.leftMargin: 10
             anchors.bottomMargin: 10
@@ -78,11 +89,13 @@ Page {
     }
 
     Text {
-        id: hold
+        id: ihold
         x: 286
         color: "#c00000"
-        text: qsTr("HOLD")
-        font.pixelSize: 16
+        text: "HOLD"
+        visible: false
+        smooth: true
+        font.pixelSize: 20
         anchors.top: parent.top
         anchors.topMargin: 5
         anchors.right: parent.right
@@ -99,6 +112,7 @@ Page {
         width: 160
         height: 160
         radius: 20
+        smooth: true
         anchors.horizontalCenter: parent.horizontalCenter
         gradient: Gradient {
             GradientStop {
@@ -121,9 +135,11 @@ Page {
         id: logo
         x: 0
         y: 220
-        width: 160
+        width: 120
         height: 50
         radius: 3
+        smooth: true
+        anchors.horizontalCenter: parent.horizontalCenter
         border.width: 3
         gradient: Gradient {
             GradientStop {
@@ -137,17 +153,14 @@ Page {
             }
         }
         border.color: "#646464"
-        anchors.rightMargin: 80
-        anchors.leftMargin: 80
         anchors.topMargin: 15
         anchors.top: display.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
 
         Text {
             id: lux
             color: "#646464"
             text: "LUX"
+            smooth: true
             anchors.fill: parent
             font.family: "Arial"
             styleColor: "#323232"
@@ -157,6 +170,73 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 50
     }
+    }
+
+    Rectangle {
+        id: hold
+        x: 20
+        y: 458
+        height: 70
+        radius: 20
+        smooth: true
+        gradient: Gradient {
+            GradientStop {
+                position: 0
+                color: "#ffffff"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#000000"
+            }
+        }
+        border.width: 3
+        border.color: "#787878"
+        anchors.top: line.bottom
+        anchors.topMargin: 10
+        anchors.leftMargin: 20
+        anchors.rightMargin: 20
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        Text {
+            id: thold
+            color: "#323232"
+            text: "HOLD"
+            font.pixelSize: 30
+            smooth: true
+            styleColor: "#8c8c8c"
+            style: Text.Raised
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.NoWrap
+            anchors.fill: parent
+        }
+
+        MouseArea {
+            id: mhold
+            anchors.fill: parent
+            onClicked: {
+                if (lightSensor.active)
+                    lightSensor.stop();
+                else
+                    lightSensor.start();
+            }
+        }
+    }
+
+    Rectangle {
+        id: line
+        height: 3
+        color: "#969696"
+        radius: 1
+        smooth: true
+        anchors.top: logo.bottom
+        anchors.topMargin: 10
+        anchors.left: parent.left
+        anchors.leftMargin: 50
+        anchors.right: parent.right
+        anchors.rightMargin: 50
     }
 
 }
