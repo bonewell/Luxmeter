@@ -6,6 +6,7 @@ import Torch 1.2
 Page {
     id: meter
     smooth: true
+    orientationLock: PageOrientation.LockPortrait
 
     Torch {
         id: torch
