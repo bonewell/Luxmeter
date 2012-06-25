@@ -1,4 +1,4 @@
-This package was debianized by Konstantin Kolodiy <bone@unknown> on
+This package was debianized by Konstantin Kolodiy <bone@land.ru> on
 Fri, 22 Jun 2012 23:46:48 +0900.
 
 It was downloaded from <url://example.com>
@@ -10,7 +10,7 @@ Upstream Author(s):
 
 Copyright:
 
-    <Copyright (C) YYYY Name OfAuthor>
+    <Copyright (C) 2012 Konstantin Kolodiy>
     <likewise for another author>
 
 License:
@@ -32,7 +32,7 @@ License:
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL'.
 
-The Debian packaging is (C) 2012, Konstantin Kolodiy <bone@unknown> and
+The Debian packaging is (C) 2012, Konstantin Kolodiy <bone@land.ru> and
 is licensed under the GPL, see above.
 
 
