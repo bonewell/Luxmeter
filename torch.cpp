@@ -22,6 +22,7 @@ Torch::~Torch()
 void Torch::start()
 {
     if (f && f->flashMode() != QCameraExposure::FlashTorch) {
+        qDebug() << "Start torch";
         f->setFlashMode(QCameraExposure::FlashTorch);
     }
 }
@@ -29,6 +30,7 @@ void Torch::start()
 void Torch::stop()
 {
     if (f && f->flashMode() != QCameraExposure::FlashOff) {
+        qDebug() << "Stop torch";
         f->setFlashMode(QCameraExposure::FlashOff);
     }
 }

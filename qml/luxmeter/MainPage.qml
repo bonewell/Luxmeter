@@ -16,19 +16,19 @@ Page {
         onAutomatedChanged: {
             iautotorch.visible = automated;
             if (automated)
-                bound = light.text;
+                bound = ilight.text;
             else
                 stop();
         }
     }
 
     LightSensor {
-        id: lightSensor
+        id: luxmeter
         active: true
 
         onReadingChanged: {
             if (!ihold.visible)
-                light.text = reading.lux;
+                ilight.text = reading.lux;
             if (!torch.automated) return;
             if (reading.lux < torch.bound)
                 torch.start();
@@ -84,7 +84,7 @@ Page {
         anchors.topMargin: 20
 
         Text {
-            id: light
+            id: ilight
             color: "#c00000"
             text: "0"
             smooth: true
@@ -329,6 +329,21 @@ Page {
         GradientStop {
             position: 1
             color: "#646464"
+        }
+    }
+
+    onStatusChanged: {
+        switch (status) {
+        case PageStatus.Deactivating:
+        case PageStatus.Inactive:
+            luxmeter.stop();
+            torch.stop();
+        break;
+        case PageStatus.Activating:
+        case PageStatus.Active:
+            luxmeter.start();
+            torch.start();
+        break;
         }
     }
 }
