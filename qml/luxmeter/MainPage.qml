@@ -331,19 +331,4 @@ Page {
             color: "#646464"
         }
     }
-
-    onStatusChanged: {
-        switch (status) {
-        case PageStatus.Deactivating:
-        case PageStatus.Inactive:
-            luxmeter.stop();
-            torch.stop();
-        break;
-        case PageStatus.Activating:
-        case PageStatus.Active:
-            luxmeter.start();
-            torch.start();
-        break;
-        }
-    }
 }
