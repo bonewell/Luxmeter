@@ -1,3 +1,10 @@
+luxmeter (0.0.2) unstable; urgency=low
+  * Added select change units (lux/fc)
+  * Added the minimum and maximum value
+  * New desing
+
+ -- Konstantin Kolodiy <bone@land.ru>  Thu, 14 Mar 2013 23:06:20 +0900
+
 luxmeter (0.0.1) unstable; urgency=low
 
   * Initial Release.

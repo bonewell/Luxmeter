@@ -5,6 +5,8 @@ import Torch 1.2
 
 Page {
     id: meter
+    width: 480
+    height: 854
     smooth: true
     orientationLock: PageOrientation.LockPortrait
 
@@ -39,205 +41,222 @@ Page {
 
     Rectangle {
         id: background
-        radius: 20
+        x: 0
+        y: 0
+        color: "#5a5a5a"
+        radius: 0
+        anchors.rightMargin: 0
+        anchors.bottomMargin: 0
+        anchors.leftMargin: 0
+        anchors.topMargin: 0
         smooth: true
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#c8c8c8"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#646464"
-            }
-        }
-        border.width: 20
-        border.color: "#969696"
         z: -1
         anchors.fill: parent
     }
 
     Rectangle {
         id: display
-        height: 160
-        radius: 5
+        x: 25
+        y: 263
+        width: 431
+        height: 203
+        color: "#00000000"
+        radius: 0
+        z: 1
         smooth: true
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#646464"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#323232"
-            }
-        }
-        border.color: "#333333"
-        border.width: 5
         anchors.right: parent.right
-        anchors.rightMargin: 20
+        anchors.rightMargin: 25
         anchors.left: parent.left
-        anchors.leftMargin: 20
+        anchors.leftMargin: 25
         anchors.top: sensor.bottom
         anchors.topMargin: 20
 
         Text {
             id: ilight
-            color: "#c00000"
-            text: "0"
+            x: 6
+            y: 22
+            color: "#1e1e1e"
+            text: "130100"
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
             smooth: true
-            anchors.rightMargin: 10
-            anchors.leftMargin: 10
-            anchors.bottomMargin: 10
-            anchors.topMargin: 10
-            anchors.fill: parent
-            font.family: "Impact"
+            anchors.rightMargin: 14
+            anchors.bottomMargin: 0
+            font.family: "DS-Digital"
             font.pixelSize: 130
             horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignTop
             z: 1
-            style: Text.Normal
-            font.bold: true
     }
 
     Text {
         id: ihold
-        x: 286
-        color: "#c00000"
+        y: 15
+        color: "#1e1e1e"
         text: "HOLD"
+        wrapMode: Text.NoWrap
+        anchors.left: parent.left
+        anchors.leftMargin: 11
+        styleColor: "#323232"
         visible: false
         smooth: true
-        font.pixelSize: 20
+        font.pixelSize: 35
         anchors.top: parent.top
-        anchors.topMargin: 5
-        anchors.right: parent.right
-        anchors.rightMargin: 10
-        font.family: "Arial Black"
-        font.bold: true
-        verticalAlignment: Text.AlignBottom
+        anchors.topMargin: 15
+        font.family: "DS-Digital"
         horizontalAlignment: Text.AlignRight
     }
 
     Text {
         id: iautotorch
-        x: 278
-        y: 9
-        color: "#c00000"
+        x: 11
+        y: 51
+        color: "#1e1e1e"
         text: "AT"
+        anchors.left: parent.left
+        anchors.leftMargin: 11
         smooth: true
-        font.pixelSize: 20
-        anchors.top: parent.top
-        anchors.topMargin: 5
+        font.pixelSize: 35
+        anchors.top: ihold.bottom
+        anchors.topMargin: 0
         visible: false
-        anchors.rightMargin: 10
-        font.family: "Arial Black"
-        font.bold: true
-        anchors.right: ihold.left
+        font.family: "DS-Digital"
         horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignBottom
-    }
     }
 
-    Rectangle {
-        id: sensor
-        width: 160
-        height: 160
-        radius: 20
-        smooth: true
-        anchors.horizontalCenter: parent.horizontalCenter
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#ffffff"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#c8c8c8"
-            }
-        }
+    Text {
+        id: imax
+        x: 365
+        color: "#1e1e1e"
+        text: qsTr("MAX")
         anchors.top: parent.top
-        anchors.topMargin: 30
-        border.width: 15
-        border.color: "#555555"
+        anchors.topMargin: 15
+        anchors.right: parent.right
+        anchors.rightMargin: 14
+        font.family: "DS-Digital"
+        smooth: true
+        font.pixelSize: 35
     }
 
-    Rectangle {
-        id: logo
-        x: 0
-        y: 220
-        width: 120
-        height: 50
-        radius: 3
+    Text {
+        id: imin
+        x: 372
+        y: 51
+        color: "#1e1e1e"
+        text: qsTr("MIN")
+        anchors.top: imax.bottom
+        anchors.topMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 14
+        font.family: "DS-Digital"
         smooth: true
-        anchors.horizontalCenter: parent.horizontalCenter
-        border.width: 3
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#c8c8c8"
-            }
+        font.pixelSize: 35
+    }
 
-            GradientStop {
-                position: 1
-                color: "#646464"
-            }
-        }
-        border.color: "#646464"
+    Text {
+        id: ilx
+        y: 148
+        color: "#1e1e1e"
+        text: qsTr("LX")
+        smooth: true
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 19
+        anchors.left: parent.left
+        anchors.leftMargin: 11
+        font.family: "DS-Digital"
+        font.pixelSize: 35
+    }
+
+    Text {
+        id: ifc
+        x: 11
+        y: 112
+        color: "#1e1e1e"
+        text: qsTr("FC")
+        smooth: true
+        visible: false
+        anchors.bottom: ilx.top
+        anchors.bottomMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 11
+        font.family: "DS-Digital"
+        font.pixelSize: 35
+    }
+
+    Text {
+        id: imaxvalue
+        x: 251
+        color: "#1e1e1e"
+        text: qsTr("135000")
+        smooth: true
+        anchors.right: imax.left
+        anchors.rightMargin: 19
+        anchors.top: parent.top
         anchors.topMargin: 15
-        anchors.top: display.bottom
+        horizontalAlignment: Text.AlignRight
+        font.family: "DS-Digital"
+        font.pixelSize: 35
+    }
 
-        Text {
-            id: lux
-            color: "#646464"
-            text: "LUX"
-            smooth: true
-            anchors.fill: parent
-            font.family: "Arial"
-            styleColor: "#323232"
-            style: Text.Outline
-            font.bold: true
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 50
+    Text {
+        id: iminvalue
+        x: 318
+        y: 51
+        color: "#1e1e1e"
+        text: qsTr("10")
+        smooth: true
+        anchors.top: imaxvalue.bottom
+        anchors.topMargin: 0
+        anchors.right: imin.left
+        anchors.rightMargin: 27
+        font.family: "DS-Digital"
+        horizontalAlignment: Text.AlignRight
+        font.pixelSize: 35
+    }
+
+    Image {
+        id: screen
+        width: 431
+        height: 203
+        smooth: true
+        z: -1
+        source: "screen.png"
     }
     }
 
     Rectangle {
         id: hold
-        x: 20
-        y: 458
-        height: 70
-        radius: 20
+        height: 90
+        radius: 10
+        anchors.left: parent.left
+        anchors.leftMargin: 25
+        anchors.right: parent.right
+        anchors.rightMargin: 25
         smooth: true
         gradient: generalButton
-        border.width: 3
-        border.color: "#787878"
-        anchors.top: line.bottom
-        anchors.topMargin: 10
-        anchors.leftMargin: 20
-        anchors.rightMargin: 20
-        anchors.left: parent.left
-        anchors.right: parent.right
+        border.width: 2
+        border.color: "#1e1e1e"
+        anchors.top: lxfc.bottom
+        anchors.topMargin: 20
 
         Text {
             id: thold
-            color: "#323232"
+            color: "#1e1e1e"
             text: "HOLD"
-            font.pixelSize: 30
+            style: Text.Sunken
+            font.family: "Monospace"
+            z: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: 40
             smooth: true
-            styleColor: "#8c8c8c"
-            style: Text.Raised
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
+            styleColor: "#969696"
             wrapMode: Text.NoWrap
-            anchors.fill: parent
         }
 
         MouseArea {
             id: mhold
+            hoverEnabled: false
+            enabled: true
             anchors.fill: parent
 
             onClicked: {
@@ -251,41 +270,28 @@ Page {
     }
 
     Rectangle {
-        id: line
-        height: 3
-        color: "#969696"
-        radius: 1
-        smooth: true
-        anchors.top: logo.bottom
-        anchors.topMargin: 10
-        anchors.left: parent.left
-        anchors.leftMargin: 50
-        anchors.right: parent.right
-        anchors.rightMargin: 50
-    }
-
-    Rectangle {
         id: autotorch
-        x: 29
-        y: 457
-        height: 70
-        radius: 20
+        x: 20
+        y: 634
+        height: 90
+        radius: 10
         smooth: true
         anchors.top: hold.bottom
-        border.color: "#787878"
+        border.color: "#1e1e1e"
         anchors.topMargin: 20
         Text {
             id: tautotorch
-            color: "#323232"
+            color: "#1e1e1e"
             text: "AUTO TORCH"
+            font.family: "Monospace"
+            z: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
             smooth: true
-            font.pixelSize: 30
-            anchors.fill: parent
-            style: Text.Raised
+            font.pixelSize: 40
+            style: Text.Sunken
             wrapMode: Text.NoWrap
-            styleColor: "#8c8c8c"
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
+            styleColor: "#969696"
         }
 
         MouseArea {
@@ -300,35 +306,213 @@ Page {
                 autotorch.gradient = pressedButton;
             }
         }
-        anchors.rightMargin: 20
-        border.width: 3
+        anchors.rightMargin: 25
+        border.width: 2
         anchors.right: parent.right
-        anchors.leftMargin: 20
+        anchors.leftMargin: 25
         gradient: generalButton
         anchors.left: parent.left
     }
+
+    Image {
+        id: sensor
+        x: 251
+        width: 205
+        height: 205
+        smooth: true
+        rotation: 50
+        anchors.top: parent.top
+        anchors.topMargin: 20
+        anchors.right: parent.right
+        anchors.rightMargin: 25
+        source: "sensor.png"
+    }
+
+    Image {
+        id: lux
+        width: 189
+        height: 101
+        smooth: true
+        anchors.top: parent.top
+        anchors.topMargin: 75
+        anchors.left: parent.left
+        anchors.leftMargin: 25
+        source: "lux.png"
+    }
+
+    Rectangle {
+        id: topline
+        y: 55
+        height: 3
+        color: "#969696"
+        smooth: true
+        anchors.bottom: lux.top
+        anchors.bottomMargin: 24
+        anchors.right: parent.right
+        anchors.rightMargin: 210
+        anchors.left: parent.left
+        anchors.leftMargin: 20
+    }
+
+    Rectangle {
+        id: bottomline
+        height: 3
+        color: "#969696"
+        smooth: true
+        anchors.top: lux.bottom
+        anchors.topMargin: 23
+        anchors.right: parent.right
+        anchors.rightMargin: 210
+        anchors.left: parent.left
+        anchors.leftMargin: 20
+    }
+
     Gradient {
         id: generalButton
+
         GradientStop {
-            position: 0
+            position: 1
             color: "#cfcfcf"
         }
 
         GradientStop {
-            position: 1
+            position: 0.8
+            color: "#404040"
+        }
+
+        GradientStop {
+            position: 0
+            color: "#101010"
+        }
+
+        GradientStop {
+            position: 0.2
             color: "#404040"
         }
     }
+
     Gradient {
         id: pressedButton
+
+        GradientStop {
+            position: 0.9
+            color: "#808080"
+        }
+
+        GradientStop {
+            position: 0.8
+            color: "#404040"
+        }
+
         GradientStop {
             position: 0
-            color: "#c8c8c8"
+            color: "#000000"
         }
 
         GradientStop {
             position: 1
-            color: "#646464"
+            color: "#000000"
+        }
+
+        GradientStop {
+            position: 0.2
+            color: "#404040"
         }
     }
+
+    Rectangle {
+        id: lxfc
+        width: 200
+        height: 90
+        color: "#ffffff"
+        radius: 10
+        smooth: true
+        border.width: 2
+        border.color: "#000000"
+        anchors.left: parent.left
+        anchors.leftMargin: 25
+        anchors.top: display.bottom
+        anchors.topMargin: 20
+        gradient: generalButton
+
+        MouseArea {
+            id: mlxfc
+            anchors.fill: parent
+
+            onClicked: {
+                ilx.visible = !ilx.visible;
+                ifc.visible = !ifc.visible;
+                lxfc.gradient = generalButton;
+            }
+            onPressed: {
+                lxfc.gradient = pressedButton;
+            }
+        }
+
+        Text {
+            id: tlxfc
+            x: 40
+            y: 21
+            color: "#1e1e1e"
+            text: qsTr("LX/FC")
+            smooth: true
+            anchors.verticalCenterOffset: 0
+            anchors.horizontalCenterOffset: 0
+            style: Text.Sunken
+            styleColor: "#969696"
+            font.family: "Monospace"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 40
+        }
+    }
+
+    Rectangle {
+        id: reset
+        y: 570
+        height: 90
+        color: "#ffffff"
+        radius: 10
+        smooth: true
+        border.width: 2
+        border.color: "#000000"
+        anchors.right: parent.right
+        anchors.rightMargin: 25
+        anchors.left: lxfc.right
+        anchors.leftMargin: 25
+        anchors.top: display.bottom
+        anchors.topMargin: 20
+        gradient: generalButton
+
+        MouseArea {
+            id: mreset
+            anchors.fill: parent
+
+            onClicked: {
+                iminvalue.text = "0";
+                imaxvalue.text = "0";
+                reset.gradient = generalButton;
+            }
+            onPressed: {
+                reset.gradient = pressedButton;
+            }
+        }
+
+        Text {
+            id: treset
+            x: 125
+            y: 53
+            color: "#1e1e1e"
+            text: qsTr("RESET")
+            smooth: true
+            styleColor: "#969696"
+            style: Text.Sunken
+            font.family: "Monospace"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 40
+        }
+    }
+
+
 }
