@@ -104,6 +104,8 @@ Page {
         height: 203
         color: "#00000000"
         radius: 0
+        border.width: 2
+        border.color: "#000000"
         z: 1
         smooth: true
         anchors.right: parent.right
@@ -386,7 +388,18 @@ Page {
         id: topline
         y: 55
         height: 3
-        color: "#969696"
+        radius: 0
+        gradient: Gradient {
+            GradientStop {
+                position: 0
+                color: "#000000"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#ffffff"
+            }
+        }
         smooth: true
         anchors.bottom: lux.top
         anchors.bottomMargin: 24
@@ -399,7 +412,17 @@ Page {
     Rectangle {
         id: bottomline
         height: 3
-        color: "#969696"
+        gradient: Gradient {
+            GradientStop {
+                position: 0
+                color: "#000000"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#ffffff"
+            }
+        }
         smooth: true
         anchors.top: lux.bottom
         anchors.topMargin: 23
