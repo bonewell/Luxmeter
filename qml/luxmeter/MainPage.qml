@@ -11,6 +11,11 @@ Page {
     smooth: true
     orientationLock: PageOrientation.LockPortrait
 
+    FontLoader {
+        id: dsDigital
+        source: "DS-Digital-Italic.ttf"
+    }
+
     Torch {
         id: torch
         automated: false
