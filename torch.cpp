@@ -3,9 +3,9 @@
 #include "torch.h"
 
 Torch::Torch(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    c(new QCamera)
 {
-    c = new QCamera;
     c->setCaptureMode(QCamera::CaptureVideo);
     f = qobject_cast<QCameraFlashControl*>(c->service()->requestControl(QCameraFlashControl_iid));
     if (!f) qCritical() << "Can't request camera flash control";
@@ -35,22 +35,26 @@ void Torch::stop()
 
 bool Torch::automated()
 {
-    return autoTorch;
+    return flagAutomated;
 }
 
 void Torch::setAutomated(bool value)
 {
-    autoTorch = value;
-    emit automatedChanged();
+    if (flagAutomated != value) {
+        flagAutomated = value;
+        emit automatedChanged();
+    }
 }
 
 qreal Torch::bound()
 {
-    return boundTorch;
+    return valueBound;
 }
 
 void Torch::setBound(qreal value)
 {
-    boundTorch = value;
-    emit boundChanged();
+    if (valueBound != value) {
+        valueBound = value;
+        emit boundChanged();
+    }
 }

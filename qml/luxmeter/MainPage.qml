@@ -2,6 +2,7 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import QtMobility.sensors 1.2
 import Torch 1.2
+import Memory 1.1
 
 Page {
     id: meter
@@ -18,9 +19,51 @@ Page {
         onAutomatedChanged: {
             iautotorch.visible = automated;
             if (automated)
-                bound = ilight.text;
+                bound = memory.cur;
             else
                 stop();
+        }
+    }
+
+    Memory {
+        id: memory
+        type: Memory.LX
+        cur: NaN
+
+        onTypeChanged: {
+            switch (memory.type) {
+            case Memory.LX: {
+                ilx.visible = true;
+                ifc.visible = false;
+            } break;
+            case Memory.FC: {
+                ilx.visible = false;
+                ifc.visible = true;
+            } break;
+            }
+        }
+
+        onCurChanged: {
+            ilight.text = hold ? visible : cur;
+
+            if (!torch.automated) return;
+            if (cur < torch.bound)
+                torch.start();
+            else
+                torch.stop();
+        }
+
+        onMinChanged: {
+            iminvalue.text = min;
+        }
+
+        onMaxChanged: {
+            imaxvalue.text = max;
+        }
+
+        onHoldChanged: {
+            ihold.visible = hold;
+            ilight.text = visible;
         }
     }
 
@@ -29,13 +72,7 @@ Page {
         active: true
 
         onReadingChanged: {
-            if (!ihold.visible)
-                ilight.text = reading.lux;
-            if (!torch.automated) return;
-            if (reading.lux < torch.bound)
-                torch.start();
-            else
-                torch.stop();
+            memory.cur = reading.lux;
         }
     }
 
@@ -224,7 +261,7 @@ Page {
     }
 
     Rectangle {
-        id: hold
+        id: keyHold
         height: 90
         radius: 10
         anchors.left: parent.left
@@ -235,7 +272,7 @@ Page {
         gradient: generalButton
         border.width: 2
         border.color: "#1e1e1e"
-        anchors.top: lxfc.bottom
+        anchors.top: keyLxfc.bottom
         anchors.topMargin: 20
 
         Text {
@@ -260,23 +297,23 @@ Page {
             anchors.fill: parent
 
             onClicked: {
-                ihold.visible = !ihold.visible;
-                hold.gradient = generalButton;
+                memory.hold = !memory.hold;
+                keyHold.gradient = generalButton;
             }
             onPressed: {
-                hold.gradient = pressedButton;
+                keyHold.gradient = pressedButton;
             }
         }
     }
 
     Rectangle {
-        id: autotorch
+        id: keyAutotorch
         x: 20
         y: 634
         height: 90
         radius: 10
         smooth: true
-        anchors.top: hold.bottom
+        anchors.top: keyHold.bottom
         border.color: "#1e1e1e"
         anchors.topMargin: 20
         Text {
@@ -300,10 +337,10 @@ Page {
 
             onClicked: {
                 torch.automated = !torch.automated;
-                autotorch.gradient = generalButton;
+                keyAutotorch.gradient = generalButton;
             }
             onPressed: {
-                autotorch.gradient = pressedButton;
+                keyAutotorch.gradient = pressedButton;
             }
         }
         anchors.rightMargin: 25
@@ -421,7 +458,7 @@ Page {
     }
 
     Rectangle {
-        id: lxfc
+        id: keyLxfc
         width: 200
         height: 90
         color: "#ffffff"
@@ -440,12 +477,14 @@ Page {
             anchors.fill: parent
 
             onClicked: {
-                ilx.visible = !ilx.visible;
-                ifc.visible = !ifc.visible;
-                lxfc.gradient = generalButton;
+                switch (memory.type) {
+                case Memory.LX: memory.type = Memory.FC; break;
+                case Memory.FC: memory.type = Memory.LX; break;
+                }
+                keyLxfc.gradient = generalButton;
             }
             onPressed: {
-                lxfc.gradient = pressedButton;
+                keyLxfc.gradient = pressedButton;
             }
         }
 
@@ -468,7 +507,7 @@ Page {
     }
 
     Rectangle {
-        id: reset
+        id: keyReset
         y: 570
         height: 90
         color: "#ffffff"
@@ -478,7 +517,7 @@ Page {
         border.color: "#000000"
         anchors.right: parent.right
         anchors.rightMargin: 25
-        anchors.left: lxfc.right
+        anchors.left: keyLxfc.right
         anchors.leftMargin: 25
         anchors.top: display.bottom
         anchors.topMargin: 20
@@ -489,12 +528,12 @@ Page {
             anchors.fill: parent
 
             onClicked: {
-                iminvalue.text = "0";
-                imaxvalue.text = "0";
-                reset.gradient = generalButton;
+                memory.reset();
+                torch.automated = false;
+                keyReset.gradient = generalButton;
             }
             onPressed: {
-                reset.gradient = pressedButton;
+                keyReset.gradient = pressedButton;
             }
         }
 

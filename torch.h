@@ -32,8 +32,8 @@ public slots:
 private:
     QCamera *c;
     QCameraFlashControl *f;
-    bool autoTorch;
-    qreal boundTorch;
+    bool flagAutomated;
+    qreal valueBound;
 };
 
 #endif // TORCH_H
