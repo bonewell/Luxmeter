@@ -6,8 +6,6 @@ import Memory 1.1
 
 Page {
     id: meter
-    width: 480
-    height: 854
     smooth: true
     orientationLock: PageOrientation.LockPortrait
 
