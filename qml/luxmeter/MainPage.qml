@@ -99,7 +99,7 @@ Page {
         x: 25
         y: 263
         width: 431
-        height: 203
+        height: 202
         color: "#00000000"
         radius: 0
         border.width: 2
@@ -256,10 +256,9 @@ Page {
     }
 
     Image {
-        id: screen
-        anchors.fill: parent
-        smooth: true
+        id: image1
         z: -1
+        anchors.fill: parent
         source: "screen.png"
     }
     }
