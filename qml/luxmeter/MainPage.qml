@@ -257,8 +257,7 @@ Page {
 
     Image {
         id: screen
-        width: 431
-        height: 203
+        anchors.fill: parent
         smooth: true
         z: -1
         source: "screen.png"
@@ -362,7 +361,6 @@ Page {
         width: 205
         height: 205
         smooth: true
-        rotation: 50
         anchors.top: parent.top
         anchors.topMargin: 20
         anchors.right: parent.right
